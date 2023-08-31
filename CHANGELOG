@@ -1,0 +1,3 @@
+2020/4/1 
+  - Updated JavaScript URLs in static HTML pages.
+  - Added PHP curl option to force HTTP1.1 in php-includes.

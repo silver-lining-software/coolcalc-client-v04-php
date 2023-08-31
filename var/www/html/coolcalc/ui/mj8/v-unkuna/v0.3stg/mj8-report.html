@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>MJ8 Report</title>
+
+    <!--- Unkuna CSS. -->
+    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.8/css/unkuna.css">
+    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.8/themes/unkuna-theme.css">
+
+    <!--- Unkuna theme (local styles) -->
+    <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-unkuna/v0.3stg/theme-overrides.css">
+
+    <!--- CoolCalc REST UI styles -->
+    <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-unkuna/v0.3stg/restui.css">
+
+    <!--- Additional CoolCalc styles for printable MJ8 report. -->
+    <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-unkuna/v0.3stg/print.css">
+
+    <!--- Local CoolCalc styles. -->
+    <link rel="stylesheet" href="/coolcalc/local-assets/css/v0.3stg/coolcalc.css">
+
+</head>
+
+<body>
+<div class="cc-MJ8Report-pdf">
+    <div class="cc-MJ8Report" id="mj8-report">
+        <div id="cc-overview">
+
+            <!-- User Info -->
+            <div class="nkn-row-padding cc-MJ8Report-header">
+                <div class="nkn-col-s12 nkn-col-m8">
+                </div>
+                <div class="nkn-col-s12 nkn-col-m4 cc-vertical-align">
+                    <div class="logo">
+                        <img src="https://cdn.coolcalc.com/images/logo-report.png" title="Cool Calc Manual J">
+                    </div>
+                </div>
+            </div>    
+
+            <!-- Project Info -->
+            <div class="nkn-row">
+                <div class="nkn-col-s12 report-title">
+                    <p><b>Project Name: </b> <span id="project-name"></span></p>
+                    <p><b>Address: </b> <span id="address"></span></p>
+                </div>       
+            </div>
+
+            <!-- Design Conditions -->
+            <div class="box">
+                <div class="nkn-row">
+                    <div class="nkn-col-m12 cc-title-1">
+		                <h2 class="nkn-text-center">Outdoor design conditions</h2>
+                    </div>
+                </div>
+
+		        <!--div class="nkn-row">
+		            
+		        </div-->
+
+                <div class="nkn-row dc">
+                    <div class="nkn-col-s12">
+                        <p><b class="nkn-padding-right">Weather station: </b> <span id="weatherStation"></span></p>
+		            </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Summer Outdoor F:</span>
+                        <span class="dc1" id="temSummerOutdoor"></span>
+                    </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Summer Indoor F:</span>
+                        <span class="dc1" id="temSummerIndoor"></span>
+                    </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Design Grains:</span>
+                        <span class="dc1" id="designGrains"></span>
+                    </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Daily Range:</span>
+                        <span class="dc1" id="dailyRange"></span>
+                    </div>
+                </div>
+
+                <div class="nkn-row dc">
+                    <div class="nkn-col-m3">
+                        <span class="">Winter Outdoor F:</span>
+                        <span class="dc2" id="temWinterOutdoor"></span>
+                    </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Winter Indoor F:</span>
+                        <span class="dc2" id="temWinterIndoor"></span>
+                    </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Cooling RH:</span>
+                        <span class="dc2" id="coolingRH"></span>
+                    </div>
+                    <div class="nkn-col-m3">
+                        <span class="">Elevation (Ft):</span>
+                        <span class="dc2" id="elevation"></span>
+                    </div>
+                </div>                    
+            </div>
+
+            <!-- Totals -->
+            <div class="box">
+
+                <div class="nkn-row">
+                    <div class="nkn-col-m12 cc-title-1">
+                        <h2 class="nkn-text-center">Load Calculation Totals</h2>
+                    </div>
+                </div>
+
+                <div class="nkn-row">
+                    <div class="nkn-col-s6 report-title">
+                        <p><b>HVAC System: </b> <span id="hvac-system-name"></span></p>
+                    </div>
+                    <div class="nkn-col-s6 report-title">
+                        <p><b>Form Type: </b> <span id="form-type"></span></p>
+                        <p class="nkn-hide"><b>Room Name: </b> <span id="room-name"></span></p>
+                    </div>
+                </div>
+
+                <div class="nkn-row dc">
+					<div class="nkn-col-s12 nkn-col-m6">
+						<div class="nkn-row-padding">
+				            <div class="nkn-col-s12">
+				                <span class="">Heating BTUH:</span>
+				                <span class="dc1" id="heatingBTUH"></span>
+				            </div>
+				            <div class="nkn-col-s12">
+				                <span class="">Cooling BTUH:</span>
+				                <span class="dc1" id="coolingBTUH"></span>
+				            </div>
+				            <div class="nkn-col-s12">
+				                <span class="">CFM:</span>
+				                <span class="dc1" id="CFM"></span>
+				            </div> 
+						</div> 
+                        <div class="nkn-row-padding nkn-margin-top">
+		                    <div class="nkn-col-s12">
+		                        <span class="">Sensible cooling:</span>
+		                        <span class="dc1" id="sensibleBTUH"></span>
+		                    </div>
+		                    <div class="nkn-col-s12">
+		                        <span class="">Latent cooling:</span>
+		                        <span class="dc1" id="latentBTUH"></span>
+		                    </div>
+		                    <div class="nkn-col-s12">
+		                        <span class="">SHR:</span>
+		                        <span class="dc1" id="SHR"></span>
+		                    </div>
+                        </div>
+					</div>
+		    		<div class="nkn-col-s12 nkn-col-m6">
+                        <div class="" data-coolcalc-role="btuh-chart"></div>
+					</div>                      
+                </div>                
+            </div>
+
+	        <!--ACCA detail-->             
+            <div class="nkn-row">
+                <div class="nkn-col-s12 nkn-col-m8">
+                    <h2 class="">Approved ACCA MJ8 Calculations</h2>
+                    <p class="nkn-text-justify">
+                        Calculations are based on the ACCA Manual J 8th Edition and are approved by ACCA. All computed
+                        calculations are estimates on building use, weather data, and inputted values such a R-Values,
+                        window types, duct loss, etc. Equipment selections should meet
+                        both the latent and sensible gain as well as building heat loss. See Cool Calc Manual S Report for
+                        equipment sizing verification.
+                    </p>
+                </div>
+                <div class="nkn-col-s12 nkn-col-m4">
+                    <div class="acca">
+                        <img src="https://cdn.coolcalc.com/images/PoweredbyACCAManualJ.png">
+                    </div>
+                </div>
+                <!--div class="nkn-col-m4"> 
+                    <div id="qrcode" class="nkn-center"></div>
+                </div--> 
+            </div> 
+            <!-- Heating -->
+            <div class="box cc-page-break">
+                <h2 class="cc-title-2">Heating Loads</h2>
+                <div class="nkn-row">
+                    <div class="nkn-col-m8 nkn-offset-m2">
+                        <div class="cc-scroll">
+                            <table class="nkn-table table-heating" data-khipu-role="heating">
+                                <thead>
+                                    <tr>
+                                        <th data-khipu-role="name" class="nkn-title">Section</th>
+                                        <th data-khipu-role="area" class="nkn-right-top" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                        <th data-khipu-role="heatingBTUH" class="nkn-description" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heat Loss</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="nkn-col-m8 nkn-offset-m2">
+                        <div class="cc-margin-top">
+                            <div data-coolcalc-role="heating-pie-chart" class="cc-print-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cooling -->
+            <div class="box cc-page-break">
+                <h2 class="cc-title-2">Cooling Loads</h2>
+                <div class="nkn-row">
+                    <div class="nkn-col-m8 nkn-offset-m2">
+                        <div class="cc-scroll">
+                            <table class="nkn-table table-cooling" data-khipu-role="cooling">
+                                <thead>
+                                    <tr>
+                                        <th data-khipu-role="name">Section</th>
+                                        <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                        <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible</th>
+                                        <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>  
+                    </div>
+                    <div class="nkn-col-m8 nkn-offset-m2">                 
+                        <div class="cc-margin-top">
+                            <div data-coolcalc-role="cooling-pie-chart" class="cc-print-chart"></div>
+                        </div>  
+                    </div>
+                </div>               
+            
+
+                <!-- Fenestration messages -->
+            
+                <!-- AED -->
+                <div class="box">
+                    <h2 class="cc-title-2">AED Graph</h2>
+                    <div class="nkn-row">
+                        <div class="nkn-col-m8 nkn-offset-m2">
+                            <div data-coolcalc-role="aed-chart" class=""></div> 
+                        </div>
+                    </div>             
+                </div>
+                <!--Room forms J1-->
+                <!--<div class="nkn-row-padding box">
+                    <div class="nkn-col-m12">
+                        <h2>Room forms J1:</h2>
+                        <ul id="roomFormsj1"></ul>
+                    </div>
+                </div>-->
+            </div>
+
+            <div id="cc-component-LC" class="cc-page-break">
+
+            <!-- Component Loads -->
+            <div class="box">
+                <div class="nkn-row">
+                    <div class="nkn-col-m12 cc-title-1">
+                        <h2 class="nkn-text-center">Component Loads</h2>
+                    </div>
+                </div>                
+
+                <!--Above Grade Walls-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="aboveGradeWalls">
+                        <caption> 
+                            <span>Above Grade Walls</span>                      
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="constructionNr">Construction Nr.</th>
+                                <th data-khipu-role="exposure">Exposure</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="insulation">Insulation</th>
+                                <th data-khipu-role="UValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">U Value</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="coolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Cooling BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Below Grade Walls-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="belowGradeWalls">
+                        <caption> 
+                            <span>Below Grade Walls</span>                             
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="constructionNr">Construction Nr.</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="insulation">Insulation</th>
+                                <th data-khipu-role="UValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">U Value</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Ceilings-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="ceilings">
+                        <caption> 
+                            <span>Ceilings</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="constructionNr">Construction Nr.</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="insulation">Insulation</th>
+                                <th data-khipu-role="UValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">U Value</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="coolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Cooling BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Doors-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="doors">
+                        <caption> 
+                            <span>Doors</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="constructionNr">Construction Nr.</th>
+                                <th data-khipu-role="UValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">U Value</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="exposure">Exposure</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="coolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Cooling BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Ducts-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="ducts">
+                        <caption> 
+                            <span>Ducts</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="EHLF" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">EHLF</th>
+                                <th data-khipu-role="ESGF" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">ESGF</th>
+                                <th data-khipu-role="ELG" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">ELG</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible BTUH</th>
+                                <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Floors-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table" data-khipu-role="floors">
+                        <caption> 
+                            <span>Floors</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="constructionNr">Construction Nr.</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="heatingUValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">Heating U Value</th>
+                                <th data-khipu-role="coolingUValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">Cooling U Value</th>
+                                <th data-khipu-role="insulation">Insulation</th>
+                                <th data-khipu-role="FValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">F Value</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="coolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Cooling BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="9"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Windows-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table" data-khipu-role="windows">
+                        <caption> 
+                            <span>Windows</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="constructionNr">Construction Nr.</th>
+                                <th data-khipu-role="exposure">Exposure</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="UValue" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">UValue</th>
+                                <th data-khipu-role="SHGC" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 3 }">SHGC</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="averageCoolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Average Cooling BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Infiltration-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table" data-khipu-role="infiltration">
+                        <caption> 
+                            <span>Infiltration</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="leakageCategory">Leakage Category</th>
+                                <th data-khipu-role="ACHHeating">ACH Heating</th>
+                                <th data-khipu-role="ACHCooling">ACH Cooling</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible BTUH</th>
+                                <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Ventilation-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="ventilation">
+                        <caption> 
+                            <span>Ventilation</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="CFM" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">CFM</th>
+                                <th data-khipu-role="heatSER" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 2 }">Heating SER</th>
+                                <th data-khipu-role="sensSER" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 2 }">Sensible SER</th>
+                                <th data-khipu-role="latLER" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 2 }">Latent LER</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Blower Motor-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="blowerMotor">
+                        <caption> 
+                            <span>Blower Motor</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="watts" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Watts</th>
+                                <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Winter Humidification-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="winterHumidification">
+                        <caption> 
+                            <span>Winter Humidification</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="desiredIndoorRH">Desired Indoor RH</th>
+                                <th data-khipu-role="gallonsPerDay" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Gallons Per Day</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Skylights-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="skylights">
+                        <caption> 
+                            <span>Skylights</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="constructionNr">Construction Nr</th>
+                                <th data-khipu-role="exposure">Exposure</th>
+                                <th data-khipu-role="area" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 1 }">Area</th>
+                                <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating BTUH</th>
+                                <th data-khipu-role="averageCoolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Average Cooling BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Occupants-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="occupants">
+                        <caption> 
+                            <span>Occupants</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="nrOccupants">Nr. Occupants</th>
+                                <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible BTUH</th>
+                                <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Appliances-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="appliances">
+                        <caption> 
+                            <span>Appliances</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="description">Description</th>
+                                <th data-khipu-role="quantity">Quantity</th>
+                                <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible BTUH</th>
+                                <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--Plants-->
+                <div class="cc-scroll cc-margin-top">
+                    <table class="nkn-table " data-khipu-role="plants">
+                        <caption> 
+                            <span>Plants</span>                         
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th data-khipu-role="plantSize">Plant Size</th>
+                                <th data-khipu-role="quantity">Quantity</th>
+                                <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent BTUH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3"> 
+                                    <p>There are no components for this section.</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <!-- Room Loads -->
+            <div id="cc-room-LC" class="nkn-hide">
+                <div class="box">
+                    <div class="nkn-row">
+                        <div class="nkn-col-m12 cc-title-1">
+                            <h2 class="nkn-text-center">Room Loads</h2>
+                        </div>
+                    </div>
+                    <div class="cc-scroll cc-margin-top">
+                        <table class="nkn-table " data-khipu-role="roomLoads">
+                            <caption> 
+                                <span>Rooms</span>                         
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th data-khipu-role="RoomName">Room Name</th>
+                                    <th data-khipu-role="heatingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Heating</th>
+                                    <th data-khipu-role="sensibleBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Sensible</th>
+                                    <th data-khipu-role="latentBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Latent</th>
+                                    <th data-khipu-role="coolingBTUH" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">Cooling</th>
+                                    <th data-khipu-role="CFM" data-khipu-format="{ &quot;format&quot;: &quot;number&quot;, &quot;decimalPlaces&quot;: 0 }">CFM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="6"> 
+                                        <p>There are no components for this section.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>  
+            </div>                                              
+        </div>
+    </div>              
+</div>
+
+<!--- Google charts library. -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!--- Unkuna JavaScript. -->
+<script src="https://cdn.unkuna.org/v0.7/javascript/unkuna.js"></script>
+
+<!--- KhipuJS REST client JavaScript library. -->
+<script src="https://cdn.coolcalc.com/khipu-js/v0.3stg/khipu.js"></script>
+
+<!--- CoolCalc MJ8 JavaScript library. -->
+<script src="https://cdn.coolcalc.com/javascript/mj8/shared/v0.3stg/mj8.js"></script>
+<script src="https://cdn.coolcalc.com/javascript/mj8/v-unkuna/v0.3stg/tools.js"></script>
+
+<!--- Khipu callbacks, these may be framework dependent so we separate them from the main JavaScript library. -->
+<script src="https://cdn.coolcalc.com/khipu-callbacks/mj8/v-unkuna/v0.3stg/khipu-callbacks.js"></script>
+
+<!--- Local JavaScript. -->
+<script src="/coolcalc/local-assets/javascript/v0.3stg/my-coolcalc-config.js"></script>
+<script src="/coolcalc/local-assets/javascript/v0.3stg/mj8-report.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>CoolCalc MJ8</title>
+
+    <!--- Leaflet CSS. -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+    <!--- Styles for Leaflet geoman-io plugin. -->
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+
+    <!--- Styles for Leaflet.Measure.Path plugin. -->
+    <link rel="stylesheet" href="https://cdn.coolcalc.com/leaflet-measure-path/leaflet-measure-path.css" />
+
+    <!--- Unkuna CSS. -->
+    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.8/css/unkuna.css">
+    <link rel="stylesheet" href="https://cdn.unkuna.org/v0.8/themes/unkuna-theme.css">
+
+    <!--- Unkuna theme (local styles) -->
+    <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-unkuna/v0.3stg/theme-overrides.css">
+
+    <!--- CoolCalc REST UI styles -->
+    <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-unkuna/v0.3stg/restui.css">
+
+    <!--- Local CoolCalc styles. -->
+    <link rel="stylesheet" href="/coolcalc/local-assets/css/v0.3stg/coolcalc.css">
+    <link rel="stylesheet" href="/coolcalc/local-assets/css/v0.3stg/ward-spinner.css">
+
+</head>
+
+<body>
+
+<!--- CoolCalc branded header. -->
+<header class="meat-loaf">
+    <img src="/coolcalc/local-assets/images/logo.svg" alt="CoolCalc" class="coolcalc-logo">
+</header>
+
+<!--- div "coolcalc-ui" renders the CoolCalc single page REST UI. -->
+<div id="coolcalc-ui" class="coolcalc-restui">
+
+    <!--- Replace this markup with your own branded spinner if you like. -->
+    <div class="spinner-curtain">
+        <div class="ac-spinner">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path fill="currentcolor" d="M484.45,65.05H25.25A19.54,19.54,0,0,0,5.71,84.59V439.76A19.54,19.54,0,0,0,25.25,459.3h459.2A19.54,19.54,0,0,0,504,439.76V84.59A19.54,19.54,0,0,0,484.45,65.05ZM160.22,400.41A134.52,134.52,0,1,1,294.74,265.89,134.52,134.52,0,0,1,160.22,400.41Zm229.14-22.93h-47a25,25,0,0,1,0-50h47a25,25,0,0,1,0,50Zm61.47,0a25,25,0,1,1,25-25A25.07,25.07,0,0,1,450.83,377.48Zm0-90.3H341.66a25,25,0,0,1,0-50H450.83a25,25,0,0,1,0,50Zm0-90.31H341.66a25,25,0,1,1,0-50H450.83a25,25,0,1,1,0,50Z"/>
+                    <path fill="currentcolor" class="rotate-center" d="M274.11,267.61c8,8.62-4.53,31.82-7.65,37.58-5.14,9.49-15.67,28.94-31.53,29.39-8.77.25-15.17-5.42-26.67-15.87a154.19,154.19,0,0,1-28.21-34.42,26.6,26.6,0,0,1-28.2,4.8,99.28,99.28,0,0,0-24.6,29.65c-12.18,22.76-9.25,40.12-18.67,43C97.3,365.13,82,343.63,78.21,338.3c-6.26-8.8-19.08-26.81-12.5-41.25,3.63-8,11.54-11.24,26-17a154.34,154.34,0,0,1,44.1-10.24c.18.36.38.74.59,1.13a26.86,26.86,0,0,1-.77-6.38,26.48,26.48,0,0,1,8.77-19.73A99.35,99.35,0,0,0,133,208c-12.41-22.64-28.56-29.66-25.8-39.12,3.31-11.31,29.67-12.37,36.21-12.64,10.79-.44,32.88-1.33,41.38,12.07,4.69,7.4,3.11,15.81,0,31a154.15,154.15,0,0,1-14.19,40,26.62,26.62,0,0,1,17.78,20.68,99.66,99.66,0,0,0,38.93,9.71C253.11,270.69,267.4,260.41,274.11,267.61Z"/>
+                </svg>
+            </svg>
+        </div>
+    </div>
+
+</div>
+
+<!--- Google maps library. -->
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=your-api-key-here"></script>
+
+<!--- Google charts library. -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- Leaflet. -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+<!-- Leaflet.GridLayer.GoogleMutant -->
+<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+
+<!-- Leaflet geoman-io plugin. -->
+<script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+
+<!-- Leaflet.Measure.Path-->
+<script src="https://cdn.coolcalc.com/leaflet-measure-path/leaflet-measure-path.js"></script>
+
+<!--- Unkuna JavaScript. -->
+<script src="https://cdn.unkuna.org/v0.7/javascript/unkuna.js"></script>
+
+<!--- KhipuJS REST client JavaScript library. -->
+<script src="https://cdn.coolcalc.com/khipu-js/v0.3stg/khipu.js"></script>
+
+<!-- Map trace library -->
+<script src="https://cdn.coolcalc.com/javascript/map-trace/v0.3stg/mt-widget.js"></script>
+
+<!--- CoolCalc MJ8 JavaScript library. -->
+<script src="https://cdn.coolcalc.com/javascript/mj8/shared/v0.3stg/mj8.js"></script>
+<script src="https://cdn.coolcalc.com/javascript/mj8/v-unkuna/v0.3stg/tools.js"></script>
+
+<!--- Khipu callbacks, these may be framework dependent so we separate them from the main JavaScript library. -->
+<script src="https://cdn.coolcalc.com/khipu-callbacks/mj8/v-unkuna/v0.3stg/khipu-callbacks.js"></script>
+
+<!--- Local JavaScript. -->
+<script src="/coolcalc/local-assets/javascript/mj8/v0.3stg/my-coolcalc-config.js"></script>
+<script src="/coolcalc/local-assets/javascript/mj8/v0.3stg/restui.js"></script>
+
+</body>
+</html>
+

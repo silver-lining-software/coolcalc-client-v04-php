@@ -1,0 +1,25 @@
+This is a basic PHP client for the CoolCalc MJ8 application.  Directory structure mirrors that of a typical RHEL/CentOS server with the web root as /var/www/html.  In this sample code the MJ8 user interface opens in /coolcalc/ui/mj8/v-unkuna/v0.3stg/restui.html (relative to the web root) but you are free to implement the user interface inside any existing or new HTML page in your application.
+
+Usage:
+
+For testing on a local machine typically all you have to do is copy the code and complete items 1, 3 and 6.  For a typical production implementation complete items 1 through 7 below.
+
+1) Make sure /var/www/php-includes is in your PHP "include path".  If not, move the code to your include path or edit your the "include path" variable in your PHP configs.
+2) Check your organization's API credentials in /var/www/php-includes/coolcalc-client/v0.3stg/config.php.
+3) Edit property "localDomain" in /var/www/html/coolcalc/local-assets/javascript/mj8/v0.3stg/my-coolcalc-config.js.  For development this may be "localhost" or the top level domain of your development server.
+4) Implement your own code in /var/www/html/coolcalc/user/v0.3stg/session-user.php to return the current user/session details.  This is used by the browser to request the user's project list on page load.  If you change the location of this script you also need to update the corresponding JavaScript variable in /var/www/html/coolcalc/local-assets/javascript/mj8/v0.3stg/my-coolcalc-config.js.
+5) Implement your own code in /var/www/html/coolcalc/client/v0.3stg/dealers/index.php to validate that the dealer id in the REST URL corresponds to the actual session/user info.  This is to prevent dishonest users from requesting someone else's project list.  Sample code is provided in the script.
+6) Add a valid Google maps API key in /var/www/html/coolcalc/ui/mj8/v-unkuna/v0.3stg/restui.html
+7) Optionally edit visual styles by making changes in /var/www/html/local-assets/css/v0.3stg/coolcalc.css.  If more extensive customization is required you can also override the styles that are provided by the CoolCalc CDN or host your own copy of the HTML/CSS locally so you have full control over the HTML/CSS.
+
+Endpoints:
+
+This boilerplate code includes (2) local endpoints, which are actually "entry points" at the REST API.  Other than these initial "entry points" the client does not need any pre-existing knowledge of API URLs, all navigation is done via HATEOAS links provided by the REST API.
+
+/var/www/html/coolcalc/client/v0.3stg/dealers/			=> The end user project list separated by account.
+/var/www/html/coolcalc/client/v0.3stg/MJ8Reports/		=> The MJ8 report endpoint.
+
+UI icons:
+
+This sample client uses SVG icons hosted locally to minimize issues in some browsers when requesting .svg files cross-domain.  You are free to use different icons or icon libraries.  If not using the standard SVG icons you may need to override the functions in https://cdn.coolcalc.com/khipu-callbacks/mj8/v-unkuna/v0.3stg/khipu-callbacks.js or host a similar script locally.
+

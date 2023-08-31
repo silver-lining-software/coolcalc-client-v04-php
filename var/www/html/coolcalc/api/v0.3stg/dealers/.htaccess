@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^ /coolcalc/client/v0.3stg/dealers/index.php [L]
